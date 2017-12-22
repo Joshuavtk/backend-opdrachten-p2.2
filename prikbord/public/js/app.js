@@ -14196,15 +14196,27 @@ __webpack_require__(165);
 
 
 
-Object(__WEBPACK_IMPORTED_MODULE_1_react_dom__["render"])(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    __WEBPACK_IMPORTED_MODULE_2_react_router__["Router"],
-    null,
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_2_react_router__["Route"],
-        { path: '/', component: __WEBPACK_IMPORTED_MODULE_3__components_Master__["a" /* default */] },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router__["Route"], { path: 'add-item', component: __WEBPACK_IMPORTED_MODULE_4__components_CreateItem__["a" /* default */] })
-    )
-), document.getElementById('example'));
+var routes = {
+    path: '/Bewijzenmap_school/p2.2/backend-opdrachten-p2.2/prikbord/public/',
+    component: __WEBPACK_IMPORTED_MODULE_3__components_Master__["a" /* default */],
+    // indexRoute: { component: Dashboard },
+    childRoutes: [{ path: 'add-item', component: __WEBPACK_IMPORTED_MODULE_4__components_CreateItem__["a" /* default */] }, { path: 'example', component: __WEBPACK_IMPORTED_MODULE_5__components_Example__["a" /* default */] }]
+};
+
+Object(__WEBPACK_IMPORTED_MODULE_1_react_dom__["render"])(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router__["Router"], { history: __WEBPACK_IMPORTED_MODULE_2_react_router__["browserHistory"], routes: routes }), document.getElementById('example'));
+
+// const route = "/Bewijzenmap_school/p2.2/backend-opdrachten-p2.2/prikbord/public";
+//
+// render(
+//     <Router history={browserHistory}>
+//         <Route path="/" component={Master}>
+//             <Route path="/add-item" component={Example}/>
+//         </Route>
+//         <Route path={route} component={Master}>
+//             <Route path={route + "/add-item"} component={CreateItem}/>
+//         </Route>
+//     </Router>,
+//     document.getElementById('example'));
 
 /***/ }),
 /* 165 */
@@ -59944,7 +59956,7 @@ var Master = function (_Component) {
                                 { className: 'active' },
                                 __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
                                     'a',
-                                    { href: '#' },
+                                    { href: './' },
                                     'Home'
                                 )
                             ),
@@ -59962,8 +59974,8 @@ var Master = function (_Component) {
                                 null,
                                 __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
                                     'a',
-                                    { href: '#' },
-                                    'Page 2'
+                                    { href: 'example' },
+                                    'Example'
                                 )
                             ),
                             __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
@@ -60815,70 +60827,104 @@ $export($export.S, 'Object', { create: __webpack_require__(92) });
 var CreateItem = function (_Component) {
     __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default()(CreateItem, _Component);
 
-    function CreateItem() {
+    function CreateItem(props) {
         __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default()(this, CreateItem);
 
-        return __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default()(this, (CreateItem.__proto__ || Object.getPrototypeOf(CreateItem)).apply(this, arguments));
+        var _this = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default()(this, (CreateItem.__proto__ || Object.getPrototypeOf(CreateItem)).call(this, props));
+
+        _this.state = { productName: '', productPrice: '' };
+
+        _this.handleChange1 = _this.handleChange1.bind(_this);
+        _this.handleChange2 = _this.handleChange2.bind(_this);
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
+        return _this;
     }
 
     __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass___default()(CreateItem, [{
-        key: "render",
+        key: 'handleChange1',
+        value: function handleChange1(e) {
+            this.setState({
+                productName: e.target.value
+            });
+        }
+    }, {
+        key: 'handleChange2',
+        value: function handleChange2(e) {
+            this.setState({
+                productPrice: e.target.value
+            });
+        }
+    }, {
+        key: 'handleSubmit',
+        value: function handleSubmit(e) {
+            e.preventDefault();
+            var products = {
+                name: this.state.productName,
+                price: this.state.productPrice
+            };
+            var uri = 'http://localhost:8000/items';
+            axios.post(uri, products).then(function (response) {
+                // browserHistory.push('/display-item');
+            });
+        }
+    }, {
+        key: 'render',
         value: function render() {
             return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-                "div",
+                'div',
                 null,
                 __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-                    "h1",
+                    'h1',
                     null,
-                    "Create An Item"
+                    'Create An Item'
                 ),
                 __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-                    "form",
-                    null,
+                    'form',
+                    { onSubmit: this.handleSubmit },
                     __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-                        "div",
-                        { className: "row" },
+                        'div',
+                        { className: 'row' },
                         __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-                            "div",
-                            { className: "col-md-6" },
+                            'div',
+                            { className: 'col-md-6' },
                             __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-                                "div",
-                                { className: "form-group" },
+                                'div',
+                                { className: 'form-group' },
                                 __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-                                    "label",
+                                    'label',
                                     null,
-                                    "Item Name:"
+                                    'Item Name:'
                                 ),
-                                __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement("input", { type: "text", className: "form-control" })
+                                __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('input', { type: 'text', className: 'form-control', onChange: this.handleChange1 })
                             )
                         )
                     ),
                     __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-                        "div",
-                        { className: "row" },
+                        'div',
+                        { className: 'row' },
                         __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-                            "div",
-                            { className: "col-md-6" },
+                            'div',
+                            { className: 'col-md-6' },
                             __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-                                "div",
-                                { className: "form-group" },
+                                'div',
+                                { className: 'form-group' },
                                 __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-                                    "label",
+                                    'label',
                                     null,
-                                    "Item Price:"
+                                    'Item Price:'
                                 ),
-                                __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement("input", { type: "text", className: "form-control col-md-6" })
+                                __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('input', { type: 'text', className: 'form-control col-md-6', onChange: this.handleChange2 })
                             )
                         )
                     ),
-                    __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement("br", null),
+                    __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('br', null),
                     __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-                        "div",
-                        { className: "form-group" },
+                        'div',
+                        { className: 'form-group' },
                         __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-                            "button",
-                            { className: "btn btn-primary" },
-                            "Add Item"
+                            'button',
+                            { className: 'btn btn-primary' },
+                            'Add Item'
                         )
                     )
                 )
@@ -60958,7 +61004,7 @@ var Example = function (_Component) {
     return Example;
 }(__WEBPACK_IMPORTED_MODULE_4_react__["Component"]);
 
-/* unused harmony default export */ var _unused_webpack_default_export = (Example);
+/* harmony default export */ __webpack_exports__["a"] = (Example);
 
 /***/ }),
 /* 364 */
