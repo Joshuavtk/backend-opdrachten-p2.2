@@ -12,9 +12,4 @@ yarn-error.log
 .env
 public/fonts/
 resources/assets/js/components/ExampleComponent.vue
-resources/views/auth/
-resources/views/boards/
-resources/views/layouts/
-resources/views/registration/
-resources/views/sessions/
 yarn.lock

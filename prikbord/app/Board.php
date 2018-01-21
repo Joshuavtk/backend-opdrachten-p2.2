@@ -2,12 +2,15 @@
 
 namespace App;
 
+
 class Board extends Model
 {
     public function scopeFavorite($query)
     {
         return $query->where('favorite', 1);
     }
+
+
 
     public function cards()
     {
@@ -21,6 +24,9 @@ class Board extends Model
 
     public function addCard($body)
     {
-        $this->cards()->create(compact('body'));
+        $this->cards()->create([
+            'body' => $body,
+            'user_id' => auth()->id()
+        ]);
     }
 }

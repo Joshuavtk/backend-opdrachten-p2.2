@@ -30,12 +30,30 @@
 
     <div class="cards">
         <ul class="list-group">
-            @foreach ($board->cards as $card)
-                <li class="list-group-item">
-                    <i>{{$card->created_at->diffForHumans()}}: &nbsp; </i>
-                    {{$card->body}}
-                </li>
-            @endforeach
+            @if(!isset($cards))
+                @foreach ($board->cards as $card)
+                    <li class="list-group-item">
+                        <b>{{ $card->user->name}} {{ $card->created_at->diffForHumans()}}: &nbsp; </b>
+                        {{$card->body}}
+                    </li>
+                @endforeach
+            @else
+                @foreach ($cards as $card)
+                    <li class="list-group-item">
+                        <b>{{ $card->user->name}} {{ $card->created_at->diffForHumans()}}: &nbsp; </b>
+                        {{$card->body}}
+                    </li>
+                @endforeach
+            @endif
         </ul>
+    </div>
+    <hr>
+    <div class="sidebar">
+        <h2>View cards from:</h2>
+        @foreach($archives as $archive)
+            <p><a href="?month={{ $archive['month'] }}&year={{ $archive['year'] }}">
+                    {{ $archive['month'] . ' ' . $archive['year'] }}
+                </a></p>
+        @endforeach
     </div>
 @endsection

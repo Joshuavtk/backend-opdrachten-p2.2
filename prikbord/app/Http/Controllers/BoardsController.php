@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Card;
 use Illuminate\Http\Request;
 use App\Board;
 
@@ -20,11 +21,6 @@ class BoardsController extends Controller
     public function index()
     {
         $boards = Board::latest()->get();
-
-        $archives = Board::selectRaw('year(created_at) year, monthname(created_at) month, count(*) publised')
-            ->groupBy('year', 'month')->get()->toArray();
-
-        return $archives;
 
         return view('boards.index', compact('boards'));
     }
@@ -73,7 +69,15 @@ class BoardsController extends Controller
      */
     public function show(Board $board)
     {
-        return view('boards.show', compact('board'));
+        $cards = Card::latest()->filter(request(['month', 'year']))->get();
+
+        $archives = Card::selectRaw('year(created_at) year, monthname(created_at) month, count(*) publised')
+            ->groupBy('year', 'month')
+            ->orderByRaw('min(created_at) desc')
+            ->get()
+            ->toArray();
+
+        return view('boards.show', compact('board', 'archives', 'cards'));
     }
 
     /**
