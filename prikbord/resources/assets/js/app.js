@@ -1,49 +1,22 @@
-// app.js
+
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
 
 require('./bootstrap');
-import React from 'react';
-import {render} from 'react-dom';
-import {Router, Route, browserHistory} from 'react-router';
 
-import Master from './components/Master';
-import CreateItem from './components/CreateItem';
-import Example from './components/Example';
+window.Vue = require('vue');
 
-const routes = {
-    path: '/Bewijzenmap_school/p2.2/backend-opdrachten-p2.2/prikbord/public/',
-    component: Master,
-    // indexRoute: { component: Dashboard },
-    childRoutes: [
-        { path: 'add-item', component: CreateItem },
-        { path: 'example', component: Example },
-        // {
-        //     path: 'inbox',
-        //     component: Inbox,
-        //     childRoutes: [{
-        //         path: 'messages/:id',
-        //         onEnter: ({ params }, replace) => replace(`/messages/${params.id}`)
-        //     }]
-        // },
-        // {
-        //     component: Inbox,
-        //     childRoutes: [{
-        //         path: 'messages/:id', component: Message
-        //     }]
-        // }
-    ]
-};
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
 
-render(<Router history={browserHistory} routes={routes} />, document.getElementById('example'));
+Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
-// const route = "/Bewijzenmap_school/p2.2/backend-opdrachten-p2.2/prikbord/public";
-//
-// render(
-//     <Router history={browserHistory}>
-//         <Route path="/" component={Master}>
-//             <Route path="/add-item" component={Example}/>
-//         </Route>
-//         <Route path={route} component={Master}>
-//             <Route path={route + "/add-item"} component={CreateItem}/>
-//         </Route>
-//     </Router>,
-//     document.getElementById('example'));
+const app = new Vue({
+    el: '#app'
+});

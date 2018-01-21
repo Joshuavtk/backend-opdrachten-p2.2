@@ -1,6 +1,8 @@
 // CreateItem.js
 
 import React, {Component} from 'react';
+import {browserHistory} from 'react-router';
+import browserRoute from '../app.js';
 
 class CreateItem extends Component {
     constructor(props) {
@@ -25,14 +27,15 @@ class CreateItem extends Component {
     }
 
     handleSubmit(e) {
+        console.log(browserRoute + "AAAA");
         e.preventDefault();
         const products = {
             name: this.state.productName,
             price: this.state.productPrice
         };
-        let uri = 'http://localhost:8000/items';
+        let uri = browserRoute + 'items';
         axios.post(uri, products).then((response) => {
-            // browserHistory.push('/display-item');
+            //browserHistory.push('/display-item');
         });
     }
 
@@ -59,7 +62,7 @@ class CreateItem extends Component {
                     </div>
                     <br/>
                     <div className="form-group">
-                        <button className="btn btn-primary">Add Item</button>
+                        <button className="btn btn-primary">Add Item ??</button>
                     </div>
                 </form>
             </div>

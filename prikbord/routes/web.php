@@ -11,12 +11,22 @@
 |
 */
 
+//Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('register', 'RegistrationController@create');
+Route::post('register', 'RegistrationController@store');
 
-Route::pattern('path', '[a-zA-Z0-9-/]+');
-Route::any('{path}', function () {
-    return view('welcome');
-});
+Route::get('login', 'SessionsController@create');
+Route::get('logout', 'SessionsController@destroy');
+
+Route::get('/', 'BoardsController@index')->name('home');
+Route::get('boards', 'BoardsController@index');
+
+Route::get('boards/create', 'BoardsController@create');
+Route::post('boards', 'BoardsController@store');
+
+Route::get('boards/{board}', 'BoardsController@show');
+
+Route::post('boards/{board}/cards', 'CardsController@store');
+
+
