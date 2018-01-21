@@ -21,6 +21,11 @@ class BoardsController extends Controller
     {
         $boards = Board::latest()->get();
 
+        $archives = Board::selectRaw('year(created_at) year, monthname(created_at) month, count(*) publised')
+            ->groupBy('year', 'month')->get()->toArray();
+
+        return $archives;
+
         return view('boards.index', compact('boards'));
     }
 
@@ -63,7 +68,7 @@ class BoardsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Board  $board
+     * @param  \App\Board $board
      * @return \Illuminate\Http\Response
      */
     public function show(Board $board)
