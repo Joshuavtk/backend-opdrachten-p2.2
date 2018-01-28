@@ -69,15 +69,11 @@ class BoardsController extends Controller
      */
     public function show(Board $board)
     {
-        $cards = Card::latest()->filter(request(['month', 'year']))->get();
+        if (request(['month', 'year'])) {
+            $cards = Card::latest()->filter(request(['month', 'year']))->get();
+        }
 
-        $archives = Card::selectRaw('year(created_at) year, monthname(created_at) month, count(*) publised')
-            ->groupBy('year', 'month')
-            ->orderByRaw('min(created_at) desc')
-            ->get()
-            ->toArray();
-
-        return view('boards.show', compact('board', 'archives', 'cards'));
+        return view('boards.show', compact('board', 'cards'));
     }
 
     /**

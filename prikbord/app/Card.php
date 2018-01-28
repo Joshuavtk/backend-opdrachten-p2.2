@@ -18,6 +18,15 @@ class Card extends Model
 
     }
 
+    public static function archives()
+    {
+        return static::selectRaw('year(created_at) year, monthname(created_at) month, count(*) publised')
+            ->groupBy('year', 'month')
+            ->orderByRaw('min(created_at) desc')
+            ->get()
+            ->toArray();
+    }
+
     public function board()
     {
         return $this->belongsTo(Board::class);

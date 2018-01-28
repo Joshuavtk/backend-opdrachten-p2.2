@@ -10,7 +10,7 @@
     <hr>
 
     <div class="card">
-        <div class="card-block container">
+        <div class="card-block p-3">
             <form method="POST" action="/boards/{{ $board->id }}/cards">
                 {{ csrf_field() }}
 

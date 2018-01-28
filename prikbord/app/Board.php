@@ -10,8 +10,6 @@ class Board extends Model
         return $query->where('favorite', 1);
     }
 
-
-
     public function cards()
     {
         return $this->hasMany(Card::class);

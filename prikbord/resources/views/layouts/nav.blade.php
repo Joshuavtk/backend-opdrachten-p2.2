@@ -12,17 +12,17 @@
                 </li>
                 @if (Auth::check())
                     <li class="nav-item">
-                        <a class="nav-link" href="/boards/create">Create board</a>
+                        <a class="nav-link" href="../boards/create">Create board</a>
                     </li>
                     <li class="nav-item ml-auto">
-                        <a class="nav-link" href="/logout">{{ auth()->user()->name }}</a>
+                        <a class="nav-link" href="../logout">{{ auth()->user()->name }}</a>
                     </li>
                 @else
                     <li class="nav-item ml-auto">
-                        <a class="nav-link" href="/register">Register</a>
+                        <a class="nav-link" href="{{public_path()}}/register">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link" href="../login">Login</a>
                     </li>
                 @endif
             </ul>
