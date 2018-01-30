@@ -5,14 +5,14 @@ namespace App;
 
 class Board extends Model
 {
-    public function scopeFavorite($query)
-    {
-        return $query->where('favorite', 1);
-    }
-
     public function cards()
     {
         return $this->hasMany(Card::class);
+    }
+
+    public function labels()
+    {
+        return $this->hasMany(Label::class);
     }
 
     public function user()
@@ -26,5 +26,10 @@ class Board extends Model
             'body' => $body,
             'user_id' => auth()->id()
         ]);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'title';
     }
 }

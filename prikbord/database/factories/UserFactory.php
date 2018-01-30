@@ -32,6 +32,7 @@ $factory->define(App\Board::class, function (Faker $faker) {
     ];
 });
 
+// factory(App\Card::class, 2)->create();
 $factory->define(App\Card::class, function (Faker $faker) {
     return [
         'user_id' => function () {

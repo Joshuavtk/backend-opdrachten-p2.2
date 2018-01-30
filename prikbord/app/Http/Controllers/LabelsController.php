@@ -2,30 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Card;
 use App\Label;
 use Illuminate\Http\Request;
-use App\Board;
-use App\Repositories\Boards;
 
-class BoardsController extends Controller
+class LabelsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @param \App\Repositories\Boards $boards
+     * @param \App\Label $label
      * @return \Illuminate\Http\Response
      */
-    public function index(Boards $boards)
+    public function index(Label $label)
     {
-        $boards = $boards->all();
-
-        return view('boards.index', compact('boards'));
+        return Label::all();
     }
 
     /**
@@ -35,7 +30,7 @@ class BoardsController extends Controller
      */
     public function create()
     {
-        return view('boards.create');
+        //
     }
 
     /**
@@ -46,39 +41,20 @@ class BoardsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate(request(), [
-            'title' => 'required|max:100',
-            'body' => 'required|max:1000',
-            'favorite' => 'max:2'
-        ]);
-
-        $favorite = (request('favorite') == 'on') ? true : false;
-
-        Board::create([
-            'title' => request('title'),
-            'body' => request('body'),
-            'user_id' => auth()->id(),
-            'favorite' => $favorite
-        ]);
-
-        session()->flash('message', 'You\'ve successfully created a new board');
-
-        return redirect('/boards');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Board $board
+     * @param  \App\Label $label
      * @return \Illuminate\Http\Response
      */
-    public function show(Board $board)
+    public function show(Label $label)
     {
-        if (request(['month', 'year'])) {
-            $cards = Card::latest()->filter(request(['month', 'year']))->get();
-        }
+        $board = $label->board;
 
-        return view('boards.show', compact('board', 'cards'));
+        return view('boards.show', compact('board'));
     }
 
     /**
@@ -89,7 +65,7 @@ class BoardsController extends Controller
      */
     public function edit($id)
     {
-        // GET /tasks/{id}/edit
+        //
     }
 
     /**
@@ -101,7 +77,7 @@ class BoardsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // PATCH /boards/{id}
+        //
     }
 
     /**
@@ -112,7 +88,7 @@ class BoardsController extends Controller
      */
     public function destroy($id)
     {
-        // DELETE /tasks/{id}
+        //
     }
 
 }

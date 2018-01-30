@@ -11,7 +11,7 @@
 
     <div class="card">
         <div class="card-block p-3">
-            <form method="POST" action="/boards/{{ $board->id }}/cards">
+            <form method="POST" action="/boards/{{ $board->title }}/cards">
                 {{ csrf_field() }}
 
                 <div class="form-group">
@@ -33,6 +33,11 @@
             @if(!isset($cards))
                 @foreach ($board->cards as $card)
                     <li class="list-group-item">
+                        {{--@if(count($card->labels))--}}
+                            {{--@foreach($card->labels as $label)--}}
+                                {{--{{ $label->name }}--}}
+                            {{--@endforeach--}}
+                        {{--@endif--}}
                         <b>{{ $card->user->name}} {{ $card->created_at->diffForHumans()}}: &nbsp; </b>
                         {{$card->body}}
                     </li>

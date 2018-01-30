@@ -17,7 +17,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         view()->composer('boards.show', function ($view) {
-            $view->with('archives', \App\Card::archives());
+            $archives = \App\Card::archives();
+            $labels = \App\Label::has('cards');
+            $view->with(compact('archives', 'labels'));
+            //  $labels = \App\Label::has('cards')->pluck('name', 'color', 'board_id');
         });
     }
 

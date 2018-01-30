@@ -27,6 +27,11 @@ class Card extends Model
             ->toArray();
     }
 
+    public function labels()
+    {
+        return $this->hasMany(Label::class);
+    }
+
     public function board()
     {
         return $this->belongsTo(Board::class);
