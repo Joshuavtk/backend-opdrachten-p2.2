@@ -1,4 +1,4 @@
-<form method="POST" action="/boards">
+<form method="POST" action="{{url('boards')}}">
     {{ csrf_field() }}
     {{ method_field('PATCH') }}
 

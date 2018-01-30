@@ -51,7 +51,7 @@
     <div class="sidebar">
         <h2>View cards from:</h2>
         @foreach($archives as $archive)
-            <p><a href="?month={{ $archive['month'] }}&year={{ $archive['year'] }}">
+            <p><a href="{{url()->current()}}?month={{ $archive['month'] }}&year={{ $archive['year'] }}">
                     {{ $archive['month'] . ' ' . $archive['year'] }}
                 </a></p>
         @endforeach

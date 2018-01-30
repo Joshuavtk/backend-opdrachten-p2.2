@@ -20,6 +20,12 @@
 
 @include('layouts.nav')
 
+@if ($flash = session('message'))
+    <div class="alert alert-success" id="flash-message" role="alert">
+        {{$flash}}
+    </div>
+@endif
+
 <main role="main">
     @include('layouts.header')
 

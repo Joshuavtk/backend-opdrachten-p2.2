@@ -11,7 +11,7 @@
 
     @include ('layouts.errors')
 
-    <form method="POST" action="/boards">
+    <form method="POST" action="{{url('boards')}}">
         {{ csrf_field() }}
 
         <div class="form-group">

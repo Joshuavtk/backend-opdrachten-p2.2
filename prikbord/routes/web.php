@@ -10,8 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Support\Facades\Route;
 
 //Auth::routes();
+
+//$stripe = resolve('App\Billing\Stripe');
 
 Route::get('register', 'RegistrationController@create');
 Route::post('register', 'RegistrationController@store');
@@ -29,5 +32,3 @@ Route::post('boards', 'BoardsController@store');
 Route::get('boards/{board}', 'BoardsController@show');
 
 Route::post('boards/{board}/cards', 'CardsController@store');
-
-

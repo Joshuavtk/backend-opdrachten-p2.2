@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Card;
 use Illuminate\Http\Request;
 use App\Board;
+use App\Repositories\Boards;
 
 class BoardsController extends Controller
 {
@@ -16,11 +17,12 @@ class BoardsController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param \App\Repositories\Boards $boards
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Boards $boards)
     {
-        $boards = Board::latest()->get();
+        $boards = $boards->all();
 
         return view('boards.index', compact('boards'));
     }
@@ -57,6 +59,8 @@ class BoardsController extends Controller
             'user_id' => auth()->id(),
             'favorite' => $favorite
         ]);
+
+        session()->flash('message', 'You\'ve successfully created a new board');
 
         return redirect('/boards');
     }

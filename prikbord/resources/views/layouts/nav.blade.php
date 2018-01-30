@@ -1,6 +1,6 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="../">Prikbord</a>
+        <a class="navbar-brand" href="{{url('/')}}">Prikbord</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,21 +8,21 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav" style="width: 100%">
                 <li class="nav-item active">
-                    <a class="nav-link" href="../">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{url('/')}}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 @if (Auth::check())
                     <li class="nav-item">
-                        <a class="nav-link" href="../boards/create">Create board</a>
+                        <a class="nav-link" href="{{url('boards/create')}}">Create board</a>
                     </li>
                     <li class="nav-item ml-auto">
-                        <a class="nav-link" href="../logout">{{ auth()->user()->name }}</a>
+                        <a class="nav-link" href="{{url('logout')}}">{{ auth()->user()->name }}</a>
                     </li>
                 @else
                     <li class="nav-item ml-auto">
-                        <a class="nav-link" href="{{public_path()}}/register">Register</a>
+                        <a class="nav-link" href="{{url('register')}}">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../login">Login</a>
+                        <a class="nav-link" href="{{url('login')}}">Login</a>
                     </li>
                 @endif
             </ul>
