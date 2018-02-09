@@ -32,6 +32,18 @@ $factory->define(App\Board::class, function (Faker $faker) {
     ];
 });
 
+$factory->define(App\CardList::class, function (Faker $faker) {
+    return [
+        'board_id' => function () {
+            return factory(App\Board::class)->create()->id;
+        },
+        'user_id' => function () {
+            return factory(App\User::class)->create()->id;
+        },
+        'name' => $faker->sentence
+    ];
+});
+
 // factory(App\Card::class, 2)->create();
 $factory->define(App\Card::class, function (Faker $faker) {
     return [
@@ -39,7 +51,10 @@ $factory->define(App\Card::class, function (Faker $faker) {
             return factory(App\User::class)->create()->id;
         },
         'board_id' => function () {
-            return factory(App\Board::class)->create()->id;
+            return 1;
+        },
+        'card_list_id' => function () {
+            return factory(App\CardList::class)->create()->id;
         },
         'body' => $faker->paragraph
     ];

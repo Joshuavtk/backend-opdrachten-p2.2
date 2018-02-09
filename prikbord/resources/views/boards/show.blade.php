@@ -1,64 +1,83 @@
-@extends('layouts.master')
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Joshua van 't Kruis">
+    <link rel="icon" href="">
 
-@section('title') {{$board->title}} @endsection
+    <title>{{$board->title}} | Prikbord</title>
 
-@section ('content')
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://getbootstrap.com/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url("css/app.css") }}">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url("css/board.css") }}" rel="stylesheet">
+</head>
+<body>
+
+@include('layouts.nav')
+
+@if ($flash = session('message'))
+    <div class="alert alert-success" id="flash-message" role="alert">
+        {{$flash}}
+    </div>
+@endif
+
+<main role="main">
     <h2>{{$board->title}}</h2>
     <p class="text-info">{{$board->user->name}} on {{$board->created_at->toFormattedDateString()}}</p>
     <p>{{$board->body}}</p>
-
     <hr>
 
-    <div class="card">
-        <div class="card-block p-3">
-            <form method="POST" action="/boards/{{ $board->title }}/cards">
-                {{ csrf_field() }}
+    <div class="row">
+        @foreach($board->cardLists as $cardList)
+            <ul class="list-group">
+                <li class="list-group-item">
+                    {{ $cardList->name }}
+                </li>
 
-                <div class="form-group">
-                    <label for="body">Add a new card</label>
-                    <textarea class="form-control" name="body" id="body" required
-                              placeholder="Content"></textarea>
-                </div>
+                @foreach($cardList->cards as $card)
+                    @include('cards/index')
+                @endforeach
 
-                <button type="submit" class="btn btn-primary">Add card</button>
-            </form>
-        </div>
-        @include('layouts.errors')
-    </div>
-
-    <hr>
-
-    <div class="cards">
+                @include('cards/create')
+            </ul>
+        @endforeach
         <ul class="list-group">
-            @if(!isset($cards))
-                @foreach ($board->cards as $card)
-                    <li class="list-group-item">
-                        {{--@if(count($card->labels))--}}
-                            {{--@foreach($card->labels as $label)--}}
-                                {{--{{ $label->name }}--}}
-                            {{--@endforeach--}}
-                        {{--@endif--}}
-                        <b>{{ $card->user->name}} {{ $card->created_at->diffForHumans()}}: &nbsp; </b>
-                        {{$card->body}}
-                    </li>
-                @endforeach
-            @else
-                @foreach ($cards as $card)
-                    <li class="list-group-item">
-                        <b>{{ $card->user->name}} {{ $card->created_at->diffForHumans()}}: &nbsp; </b>
-                        {{$card->body}}
-                    </li>
-                @endforeach
-            @endif
+            <li class="list-group-item">
+                @include('card_lists/create')
+            </li>
         </ul>
     </div>
     <hr>
-    <div class="sidebar">
-        <h2>View cards from:</h2>
-        @foreach($archives as $archive)
-            <p><a href="{{url()->current()}}?month={{ $archive['month'] }}&year={{ $archive['year'] }}">
-                    {{ $archive['month'] . ' ' . $archive['year'] }}
-                </a></p>
-        @endforeach
+
+    <div class="p-3">
+        @include('labels.create')
     </div>
-@endsection
+    <hr>
+
+    <div class="sidebar">
+        <h2 class="page-header">Sidebar</h2>
+        <div class="container">
+            <h3>All labels</h3>
+            <div class="p-3">
+                @include('labels.index')
+            </div>
+
+            <h3>View cards from:</h3>
+            @foreach($archives as $archive)
+                <p><a href="{{url()->current()}}?month={{ $archive['month'] }}&year={{ $archive['year'] }}">
+                        {{ $archive['month'] . ' ' . $archive['year'] }}
+                    </a></p>
+            @endforeach
+        </div>
+    </div>
+
+    @include('layouts.footer')
+</main>
+
+</body>
+</html>

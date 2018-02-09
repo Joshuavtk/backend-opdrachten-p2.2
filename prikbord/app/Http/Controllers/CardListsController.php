@@ -3,25 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Board;
-use App\Label;
+use App\CardList;
 use Illuminate\Http\Request;
 
-class LabelsController extends Controller
+class CardListsController extends Controller
 {
-    public function __construct()
-    {
-
-    }
-
     /**
      * Display a listing of the resource.
      *
-     * @param \App\Label $label
-     * @return array
+     * @return \Illuminate\Http\Response
      */
-    public function index(Label $label)
+    public function index()
     {
-        return $label->all();
+        //
     }
 
     /**
@@ -37,18 +31,16 @@ class LabelsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Board $board
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Board $board)
     {
         $this->validate(request(), [
-            'name' => 'required|max:360|min:2',
-            'color' => 'required|max:10|min:2'
+            'name' => 'required|max:250|min:1'
         ]);
 
-        $board->addLabel(request('name'), request('color'));
+        $board->addCardList(request('name'));
 
         return back();
     }
@@ -56,23 +48,21 @@ class LabelsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Label $label
+     * @param  \App\CardList  $cardList
      * @return \Illuminate\Http\Response
      */
-    public function show(Label $label)
+    public function show(CardList $cardList)
     {
-        $board = $label->board;
-
-        return view('boards.show', compact('board'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  \App\CardList  $cardList
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(CardList $cardList)
     {
         //
     }
@@ -80,11 +70,11 @@ class LabelsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\CardList  $cardList
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, CardList $cardList)
     {
         //
     }
@@ -92,12 +82,11 @@ class LabelsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  \App\CardList  $cardList
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(CardList $cardList)
     {
         //
     }
-
 }

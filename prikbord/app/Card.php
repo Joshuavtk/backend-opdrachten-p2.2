@@ -29,12 +29,17 @@ class Card extends Model
 
     public function labels()
     {
-        return $this->hasMany(Label::class);
+        return $this->belongsToMany(Label::class);
     }
 
     public function board()
     {
         return $this->belongsTo(Board::class);
+    }
+
+    public function cardList()
+    {
+        return $this->belongsTo(CardList::class);
     }
 
     public function user()

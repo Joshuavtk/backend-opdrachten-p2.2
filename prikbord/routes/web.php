@@ -37,7 +37,8 @@ Route::post('boards', 'BoardsController@store');
 // Boards content
 Route::get('boards/{board}', 'BoardsController@show');
 Route::post('boards/{board}/labels', 'LabelsController@store');
-Route::post('boards/{board}/cards', 'CardsController@store');
+Route::post('boards/{board}/{cardList}/cards', 'CardsController@store');
+Route::post('boards/{board}/card_lists', 'CardListsController@store');
 
 Route::get('labels', 'LabelsController@index');
 Route::get('labels/{label}', 'LabelsController@show');

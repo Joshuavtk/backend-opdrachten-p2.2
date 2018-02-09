@@ -9,7 +9,7 @@
 //@import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
 #flash-message {
-  position: absolute;
+  position: fixed;
   z-index: 10;
   bottom: 20px;
   right: 20px;
@@ -20,4 +20,26 @@
   0%   {opacity: 1;}
   70%   {opacity: 0.7;}
   100% {opacity: 0; display:none;}
+}
+
+.label {
+  color: #FFFFFF;
+  text-shadow: 1px 1px black, -1px 1px black, 1px -1px black, -1px -1px black;
+  font-size: 0.8em;
+  padding: .175rem .45rem;
+}
+
+body {
+  padding: 4rem 0 !important;
+}
+
+.row {
+  flex-wrap: nowrap;
+  display: inline-flex !important;
+  margin: 0 1rem;
+}
+
+.list-group {
+  width: 20rem;
+  margin: 1rem;
 }

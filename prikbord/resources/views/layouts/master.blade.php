@@ -7,14 +7,14 @@
     <meta name="author" content="Joshua van 't Kruis">
     <link rel="icon" href="">
 
-    <title>Prikbord | @yield('title')</title>
+    <title>@yield('title') | Prikbord</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://getbootstrap.com/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="{{ url("css/app.css") }}">
 
     <!-- Custom styles for this template -->
-    <link href="http://localhost:8000/css/board.css" rel="stylesheet">
+    <link href="{{ url("css/board.css") }}" rel="stylesheet">
 </head>
 <body>
 
@@ -27,7 +27,7 @@
 @endif
 
 <main role="main">
-    @include('layouts.header')
+    {{--@include('layouts.header')--}}
 
     <div class="container">
         @yield('content')

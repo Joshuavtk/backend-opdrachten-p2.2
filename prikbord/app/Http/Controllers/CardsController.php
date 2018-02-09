@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Card;
 use App\Board;
+use App\CardList;
 use Illuminate\Http\Request;
 
 class CardsController extends Controller
@@ -31,17 +32,17 @@ class CardsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Board  $board
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Board $board
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Board $board)
+    public function store(Request $request, Board $board, CardList $cardList)
     {
         $this->validate(request(), [
             'body' => 'required|max:1000|min:2'
         ]);
 
-        $board->addCard(request('body'));
+        $board->addCard(request('body'), $cardList->id);
 
         return back();
     }
@@ -49,7 +50,7 @@ class CardsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Card  $card
+     * @param  \App\Card $card
      * @return \Illuminate\Http\Response
      */
     public function show(Card $card)
@@ -60,7 +61,7 @@ class CardsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Card  $card
+     * @param  \App\Card $card
      * @return \Illuminate\Http\Response
      */
     public function edit(Card $card)
@@ -71,8 +72,8 @@ class CardsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Card  $card
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Card $card
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Card $card)
@@ -83,7 +84,7 @@ class CardsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Card  $card
+     * @param  \App\Card $card
      * @return \Illuminate\Http\Response
      */
     public function destroy(Card $card)
